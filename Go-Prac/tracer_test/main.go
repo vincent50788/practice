@@ -13,18 +13,18 @@ func main() {
 		},
 	}
 
-	file := logs.File{
-		FileConfig:logs.FileConfig{
-				FileName:   "",
-				MaxSize:    0,
-				MaxBackups: 0,
-				MaxAge:     0,
-				Compress:   false,
-				},
-	}
+	//file := logs.File{
+	//	FileConfig:logs.FileConfig{
+	//			FileName:   "",
+	//			MaxSize:    0,
+	//			MaxBackups: 0,
+	//			MaxAge:     0,
+	//			Compress:   false,
+	//			},
+	//}
 	writer := logs.Writer{
 		Console: &console,
-		File:    &file,
+		//File:    &file,
 	}
 
 	// New Logger
@@ -43,8 +43,5 @@ func main() {
 	logger.Error("ddd")
 	logger.Errorf( "val: %s", "ddd")
 
-	// Panic level
-	logger.Panic( "ddd")
-	logger.Panicf("val: %s", "ddd")
 }
 
