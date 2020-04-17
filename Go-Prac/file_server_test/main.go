@@ -6,21 +6,19 @@ import (
 	"log"
 	"os"
 	"strings"
+	"vincent/practice/Go-Prac/file_server_test/fileserver"
 )
 
 func main(){
-//	f, err := fileserver.New(fileserver.Config{
-//		Host:     "http://squirrel-dev.paradise-soft.com.tw:12345",
-//		Username: "arch",
-//		Password: "1qaz!QAZ",
-//	})
-//	if err != nil{
-//		log.Println(err)
-//	}
-//
-//	ok, err := f.Delete("/zqb/app/deposit/18.png")
-//	log.Print(ok)
-//f.
+	_, err := fileserver.New(fileserver.Config{
+		Host:     "http://squirrel-dev.paradise-soft.com.tw:12345",
+		Username: "arch",
+		Password: "1qaz!QAZ",
+	})
+	if err != nil{
+		log.Println(err)
+	}
+
 	fileToBeUploaded := "ALIPAY.png"
 	file, err := os.Open(fileToBeUploaded)
 	if err != nil {
@@ -40,10 +38,15 @@ func main(){
 	if er != nil {
 		log.Print(er)
 	}
+	tmp := string(bytes)
+	strings.Replace(strings.Trim(fmt.Sprint(tmp), "[]"), " ", ", ", -1)
+
+	log.Print("image", tmp)
 
 	//filebuffer := bufio.NewReader
 
-	log.Print("resss:  ", strings.Replace(strings.Trim(fmt.Sprint(bytes), "[]"), " ", ", ", -1))
+	//a, err := f.ZQBUpload("tutorials", "test0102", bytes)
+	//log.Print(a)
 
 
 

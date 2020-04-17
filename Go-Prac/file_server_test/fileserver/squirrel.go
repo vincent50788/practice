@@ -5,13 +5,15 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"image"
+	_ "image/gif"
+	_ "image/jpeg"
+	_ "image/png"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
 	"net/http"
 	"time"
-
-	"gitlab.geax.io/zqb/apis/service/internal/app/logger"
 )
 
 var (
@@ -65,7 +67,6 @@ func New(cfg Config) (FileServer, error) {
 	}
 	err := client.Login()
 	if err != nil {
-		logger.ApLog().Error(err)
 		return nil, err
 	}
 
@@ -84,21 +85,18 @@ func (c *SquirrelClient) Login() (err error) {
 
 	loginReqByte, err := json.Marshal(loginReq)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
 	url := c.Host + loginURI
 	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(loginReqByte))
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 	req.Header.Set("Content-Type", "application/json")
 
 	resp, err := httpClient.Do(req)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
@@ -107,7 +105,6 @@ func (c *SquirrelClient) Login() (err error) {
 	defer resp.Body.Close()
 	body, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
@@ -115,13 +112,29 @@ func (c *SquirrelClient) Login() (err error) {
 
 	err = json.Unmarshal(body, data)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
 	c.token = data.AccessToken
 
 	return
+}
+
+func ImageFormat(imageData []byte) (format string) {
+	_, format, err := image.Decode(bytes.NewReader(imageData))
+	if err != nil {
+	}
+	return format
+}
+
+func (c *SquirrelClient) ZQBUpload(path string, fileName string, image []byte) (fullpath string, err error) {
+	format := ImageFormat(image)
+	if err := c.Upload(fmt.Sprintf("/zqb/app/%s", path), fmt.Sprintf("%s.%s", fileName, format), bytes.NewReader(image)); err != nil {
+		return "", err
+	}
+
+	res := fmt.Sprintf("http://squirrel-dev.paradise-soft.com.tw/zqb/app/%s/%s.%s", path, fileName, format)
+	return res, nil
 }
 
 // Upload ...
@@ -137,13 +150,11 @@ func (c *SquirrelClient) Upload(path string, fileName string, f io.Reader) (err 
 	writer := multipart.NewWriter(body)
 	fw, err := writer.CreateFormFile("file", fields["filename"])
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
 	_, err = io.Copy(fw, f)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
@@ -153,13 +164,11 @@ func (c *SquirrelClient) Upload(path string, fileName string, f io.Reader) (err 
 
 	err = writer.Close()
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
 	req, err := http.NewRequest(http.MethodPost, url, body)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 	req.Header.Set("Authorization", "Bearer "+c.token)
@@ -167,14 +176,12 @@ func (c *SquirrelClient) Upload(path string, fileName string, f io.Reader) (err 
 
 	resp, err := httpClient.Do(req)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
 	defer resp.Body.Close()
 	respBody, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
@@ -182,7 +189,6 @@ func (c *SquirrelClient) Upload(path string, fileName string, f io.Reader) (err 
 
 	err = json.Unmarshal(respBody, data)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
@@ -196,28 +202,24 @@ func (c *SquirrelClient) Delete(path string) (ok bool, err error) {
 	url := c.Host + fileURI + path
 	req, err := http.NewRequest(http.MethodDelete, url, nil)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 	req.Header.Set("Authorization", "Bearer "+c.token)
 
 	resp, err := httpClient.Do(req)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
 	data := &response{}
 	err = json.Unmarshal(body, data)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 	ok = true
@@ -233,14 +235,12 @@ func (c *SquirrelClient) GetFileList(path string) (file FileInfo, err error) {
 	url := c.Host + fileURI + path + "?op=info"
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 	req.Header.Set("Authorization", "Bearer "+c.token)
 
 	resp, err := httpClient.Do(req)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
@@ -249,7 +249,6 @@ func (c *SquirrelClient) GetFileList(path string) (file FileInfo, err error) {
 	defer resp.Body.Close()
 	body, err = ioutil.ReadAll(resp.Body)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
@@ -261,14 +260,12 @@ func (c *SquirrelClient) GetFileList(path string) (file FileInfo, err error) {
 	data := &response{}
 	err = json.Unmarshal(body, data)
 	if err != nil {
-		logger.ApLog().Error(err)
 		return
 	}
 
 	if data.Status == 0 {
 		err = json.Unmarshal(data.Data, &file)
 		if err != nil {
-			logger.ApLog().Error(err)
 			return
 		}
 		return
