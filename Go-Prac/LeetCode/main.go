@@ -1,22 +1,20 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-
-
-
-func balancedStringSplit(s string) int {
-	result := strings.Compare(s, "")
-	for _, value := range result {
-		if value == "R"
+func fib () func() int{
+	x, y := 0, 1
+	return func() int {
+		tmp := x
+		x, y = y, x + y
+		return tmp
 	}
-	return 0
 }
 
+
 func main(){
-	s := "RRRLLLRL"
-	balancedStringSplit(s)
+	f := fib()
+	for i:=0; i<=10; i++{
+		fmt.Printf("%v: %v\n", i, f())
+	}
 }

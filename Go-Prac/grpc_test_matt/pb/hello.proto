@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+service Hello {
+    rpc Say (HelloRequest) returns (HelloReply) {}
+    rpc Saaaaay (stream HelloRequest) returns (stream HelloReply) {}
+}
+
+message HelloRequest {
+    string message = 1;
+    string eat = 2;
+    string work = 3;
+    repeated Food food = 4;
+}
+
+message HelloReply {
+    string result = 1;
+}
+
+
+message Food {
+    string key = 1;
+    string val =2;
+}

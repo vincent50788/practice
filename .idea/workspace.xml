@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="51b3fa88-eb40-486b-b7cf-c72744b220d1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Gin-Prac/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gin-Prac/.idea/Gin-Prac.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gin-Prac/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gin-Prac/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Gin-Prac/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/gRPC_test/client/stream_client/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/gRPC_test/pb/stream.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/gRPC_test/pb/stream.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/gRPC_test/server/stream_server/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/grpc_test_matt/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/grpc_test_matt/.idea/grpc_test_matt.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/grpc_test_matt/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/grpc_test_matt/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/grpc_test_matt/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/reflect_test/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/reflect_test/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/reflect_test/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/reflect_test/.idea/reflect_test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/reflect_test/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/select_test/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/select_test/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/select_test/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/select_test/.idea/select_test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/select_test/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Go-Prac/select_test/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gin-Prac/CRUD/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Gin-Prac/CRUD/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gin-Prac/ginPrac/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Go-Prac/gRPC_test/client/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Go-Prac/gRPC_test/client/simple_client/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Go-Prac/gRPC_test/pb/calc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Go-Prac/gRPC_test/server/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Go-Prac/gRPC_test/server/simple_server/main.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" path="/usr/local/Cellar/go/1.14/libexec" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1b89KNIMlwgTl092d76pwpypEnD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration name="go build vincent/practice/Go-Prac/httpPrac" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="practice" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/Go-Prac/httpPrac/main.go" />
+      <package value="vincent/practice/Go-Prac/httpPrac" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build vincent/practice/Go-Prac/httpPrac" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="427" y="94" key="#go_build_vincent/practice/Go-Prac/httpPrac" timestamp="1588002911923">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="427" y="94" key="#go_build_vincent/practice/Go-Prac/httpPrac/-256.-1080.1920.1080/0.0.1440.900@0.0.1440.900" timestamp="1588002911923" />
+  </component>
+</project>

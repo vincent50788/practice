@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/gin-gonic/gin/binding"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -22,7 +24,7 @@ func main() {
 	v1 := router.Group("/v1")
 	{
 		v1.GET("/books", books)
-		v1.GET("/book/:id", book)
+		v1.GET("/books/:id", book)
 	}
 
 	//GroupTest v2 for Method PUT/POST
@@ -47,7 +49,7 @@ func book(c *gin.Context) {
 	case http.MethodGet:
 		switch id {
 		case "01":
-			c.String(http.StatusOK, "id:01, ISBN:1231, name:貓的經濟學")
+			c.String(http.StatusOK, "id:%v, ISBN:1231, name:貓的經濟學\n", id)
 		case "02":
 			c.String(http.StatusOK, "id:02, ISBN:12cs31, name:單一麥芽純麥")
 		case "03":
@@ -91,12 +93,27 @@ func book(c *gin.Context) {
 }
 
 func bookAdd(c *gin.Context) {
-	id := c.PostForm("id")
-	name := c.PostForm("name")
-	ISBN := c.PostForm("ISBN")
+	type BOOK struct {
+		Id   *int    `json:"id,string"`
+		Name *string `json:"name"`
+		ISBN *string `json:"isbn"`
+	}
+	var b BOOK
 
-	if id != "" && name != "" && ISBN != "" {
-		c.String(http.StatusOK, "thanks for your donation!\nBook_info--\nbook_id:%s\nbook_name:%s\nISBN:%s", id, name, ISBN)
+	err := c.ShouldBindWith(&b, binding.JSON)
+	if err != nil {
+		log.Print(err)
+	}
+
+	id := b.Id
+	name := b.Name
+	ISBN := b.ISBN
+	//id := c.PostForm("id")
+	//name := c.PostForm("name")
+	//ISBN := c.PostForm("ISBN")
+	//res := fmt.Sprintf("thanks for your donation!\nBook_info--\nbook_id:%v\nbook_name:%s\nISBN:%s", *id, *name, *ISBN)
+	if id != nil && name != nil && ISBN != nil {
+		c.JSON(http.StatusOK, b)
 	} else {
 		c.String(200, "欄位不可留白")
 	}

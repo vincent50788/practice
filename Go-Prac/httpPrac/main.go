@@ -15,10 +15,10 @@ func webTest(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("./templates/index.html")
 
 	data := map[string]string{
-		"name":    "zeta",
+		"name":    "name",
 		"someStr": "這是一個開始",
 	}
-
+	fmt.Printf("form: %v\n", r.PostForm)
 	t.Execute(w, data)
 
 	// fmt.Fprintln(w, "這是一個開始")
@@ -31,14 +31,15 @@ func myWeb(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("key:", k, ", value:", v[0])
 	}
 
-	for k, v := range r.PostForm {
-		fmt.Println("key:", k, ", value:", v[0])
-	}
+	//for k, v := range r.PostForm {
+	//	fmt.Println("key:", k, ", value:", v[0])
+	//}
 
 	x := r.Method
 	fmt.Fprintln(w, x)
+	data := fmt.Sprintf("the request parem name is %s", r.URL.Query().Get("name"))
 
-	fmt.Fprintln(w, "這是一個開始")
+	fmt.Fprintln(w, data)
 }
 
 func pointer(w http.ResponseWriter, r *http.Request) {
@@ -54,7 +55,7 @@ func pointer(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", myWeb)
 	http.HandleFunc("/pointer", pointer)
-	http.HandleFunc("webTest", webTest)
+	http.HandleFunc("/webTest", webTest)
 
 	fmt.Println("服務器即將開啓，訪問地址 http://localhost:8080")
 
