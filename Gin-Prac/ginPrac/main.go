@@ -21,10 +21,13 @@ func main() {
 	book3 = BOOK{03, 12384721, "百富單一威士忌"}
 	*/
 	//GroupTest v1 for method GET
+
 	v1 := router.Group("/v1")
 	{
+		v1.GET("/index", getWeb)
 		v1.GET("/books", books)
 		v1.GET("/books/:id", book)
+		router.LoadHTMLFiles("index.html")
 	}
 
 	//GroupTest v2 for Method PUT/POST
@@ -35,6 +38,10 @@ func main() {
 		router.Run(":8080")
 	}
 
+}
+
+func getWeb(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.html", gin.H{})
 }
 
 func books(c *gin.Context) {

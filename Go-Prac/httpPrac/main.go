@@ -1,26 +1,21 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
-
-	"text/template"
+	"os"
 )
 
 func webTest(w http.ResponseWriter, r *http.Request) {
-
-	//t := template.New("index")
-	//t.Parse("<div>Hi,{{.name}},{{.someStr}}<div>")
-	//將上兩句註釋掉，用下面一句
-	t, _ := template.ParseFiles("./templates/index.html")
-
-	data := map[string]string{
-		"name":    "name",
-		"someStr": "這是一個開始",
+	page, err := os.Open("index.html")
+	if err != nil {
+		log.Print(err)
 	}
-	fmt.Printf("form: %v\n", r.PostForm)
-	t.Execute(w, data)
 
+
+	fmt.Fprint(w, page)
 	// fmt.Fprintln(w, "這是一個開始")
 }
 
@@ -30,6 +25,8 @@ func myWeb(w http.ResponseWriter, r *http.Request) {
 	for k, v := range r.URL.Query() {
 		fmt.Println("key:", k, ", value:", v[0])
 	}
+
+	json.Marshal()
 
 	//for k, v := range r.PostForm {
 	//	fmt.Println("key:", k, ", value:", v[0])
